@@ -8,6 +8,7 @@ import {
   Upload,
   UserRound,
   X,
+  GraduationCap,
 } from "lucide-react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -83,113 +84,128 @@ const Navbar = () => {
     <header className="border-b border-gray-200 mb-10 shadow-md bg-gradient-to-r from-blue-50 to-indigo-50">
       <nav className="container mx-auto px-4">
         <div className="h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <span className="text-2xl font-bold text-blue-600">
-              Campus Connect
-            </span>
+          {/* Enhanced Logo */}
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="relative">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 group-hover:scale-105">
+                <GraduationCap className="w-5 h-5 text-white" />
+              </div>
+              <div className="absolute -inset-1 bg-blue-500/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                CampusConnect
+              </span>
+              <span className="text-[10px] text-gray-500 font-medium -mt-1">
+                Your Career Gateway
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center gap-6">
-            {menu.map((item) => (
-              <li key={item.path}>
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActive
-                        ? "text-blue-600 bg-blue-100 shadow-sm"
-                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
-                    }`
-                  }
+          {/* Desktop Navigation - Moved to right */}
+          <div className="flex items-center gap-6">
+            {/* Navigation Menu */}
+            <ul className="hidden lg:flex items-center gap-6">
+              {menu.map((item) => (
+                <li key={item.path}>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                        isActive
+                          ? "text-blue-600 bg-blue-100 shadow-sm"
+                          : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                      }`
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+
+            {/* Desktop Buttons */}
+            {userDataLoading ? (
+              <LoaderCircle className="animate-spin text-blue-600 hidden lg:block" />
+            ) : isLogin ? (
+              <div
+                className="hidden lg:flex items-center gap-4 relative"
+                ref={profileMenuRef}
+              >
+
+                <button
+                  onClick={toggleProfileMenu}
+                  className="flex items-center gap-2 focus:outline-none bg-white px-3 py-2 rounded-full shadow-sm border border-gray-100 hover:shadow-md transition-all"
+                  aria-expanded={isProfileMenuOpen}
                 >
-                  {item.name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+                  <span className="text-sm font-medium text-gray-700">
+                    Hi, {userData?.name || "User"}
+                  </span>
+                  <img
+                    className="w-8 h-8 rounded-full object-cover border-2 border-blue-100"
+                    src={userData?.image || assets.avatarPlaceholder}
+                    alt="User profile"
+                    onError={(e) => {
+                      e.currentTarget.src = assets.avatarPlaceholder;
+                    }}
+                  />
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform text-blue-500 ${
+                      isProfileMenuOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
-          {/* Desktop Buttons */}
-          {userDataLoading ? (
-            <LoaderCircle className="animate-spin text-blue-600 hidden lg:block" />
-          ) : isLogin ? (
-            <div
-              className="hidden lg:flex items-center gap-4 relative"
-              ref={profileMenuRef}
-            >
+                {isProfileMenuOpen && (
+                  <div className="absolute right-0 top-12 mt-2 w-56 origin-top-right rounded-md border border-gray-200 bg-white z-50 overflow-hidden">
+                    <div>
+                      <Link
+                        to="/applied-applications"
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
+                      >
+                        <Briefcase size={16} />
+                        Applied Jobs
+                      </Link>
 
-              <button
-                onClick={toggleProfileMenu}
-                className="flex items-center gap-2 focus:outline-none bg-white px-3 py-2 rounded-full shadow-sm border border-gray-100 hover:shadow-md transition-all"
-                aria-expanded={isProfileMenuOpen}
-              >
-                <span className="text-sm font-medium text-gray-700">
-                  Hi, {userData?.name || "User"}
-                </span>
-                <img
-                  className="w-8 h-8 rounded-full object-cover border-2 border-blue-100"
-                  src={userData?.image || assets.avatarPlaceholder}
-                  alt="User profile"
-                  onError={(e) => {
-                    e.currentTarget.src = assets.avatarPlaceholder;
-                  }}
-                />
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform text-blue-500 ${
-                    isProfileMenuOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {isProfileMenuOpen && (
-                <div className="absolute right-0 top-12 mt-2 w-56 origin-top-right rounded-md border border-gray-200 bg-white z-50 overflow-hidden">
-                  <div>
-                    <Link
-                      to="/applied-applications"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
-                    >
-                      <Briefcase size={16} />
-                      Applied Jobs
-                    </Link>
-
-                    <button
-                      className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
-                      onClick={handleLogout}
-                    >
-                      <LogOut size={16} />
-                      Logout
-                    </button>
+                      <button
+                        className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 gap-2"
+                        onClick={handleLogout}
+                      >
+                        <LogOut size={16} />
+                        Logout
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="hidden lg:flex items-center gap-4">
-              <Link
-                to="/recruiter-login"
-                className="bg-white text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-50 transition-all shadow-sm border border-blue-100 hover:shadow"
-              >
-                Recruiter Login
-              </Link>
-              <Link
-                to="/candidate-login"
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-md text-sm hover:from-blue-700 hover:to-indigo-700 transition-all font-medium shadow-md hover:shadow-lg"
-              >
-                Login
-              </Link>
-            </div>
-          )}
+                )}
+              </div>
+            ) : (
+              <div className="hidden lg:flex items-center gap-4">
+                <Link
+                  to="/recruiter-login"
+                  className="bg-white text-blue-600 px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-50 transition-all shadow-sm border border-blue-100 hover:shadow"
+                >
+                  Recruiter Login
+                </Link>
+                <Link
+                  to="/candidate-login"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-md text-sm hover:from-blue-700 hover:to-indigo-700 transition-all font-medium shadow-md hover:shadow-lg"
+                >
+                  Candidate Login
+                </Link>
+              </div>
+            )}
 
-          {/* Mobile Menu Button */}
-          <button
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-            onClick={toggleMenu}
-            className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              onClick={toggleMenu}
+              className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none"
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </nav>
 

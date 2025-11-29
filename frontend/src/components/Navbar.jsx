@@ -21,7 +21,7 @@ const Navbar = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef(null);
   const mobileMenuRef = useRef(null);
-  const { isLogin, userData, userDataLoading, fetchUserData, setIsLogin } =
+  const { isLogin, userData, userDataLoading, setIsLogin } =
     useContext(AppContext);
   const location = useLocation();
 
@@ -81,9 +81,10 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="border-b border-gray-200 mb-10 shadow-md bg-gradient-to-r from-blue-50 to-indigo-50">
-      <nav className="container mx-auto px-4">
-        <div className="h-20 flex items-center justify-between">
+    <header className="border-b border-gray-200 mb-10 shadow-md bg-gradient-to-r from-blue-50 to-indigo-50 sticky top-0 z-50">
+      {/* Wrapper ensures spacing across all screen sizes */}
+      <div className="max-w-7xl mx-auto w-full px-5 sm:px-8 md:px-10">
+        <nav className="flex items-center justify-between h-20">
           {/* Enhanced Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="relative">
@@ -102,7 +103,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation - Moved to right */}
+          {/* Desktop Navigation */}
           <div className="flex items-center gap-6">
             {/* Navigation Menu */}
             <ul className="hidden lg:flex items-center gap-6">
@@ -111,10 +112,9 @@ const Navbar = () => {
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
-                      `px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                        isActive
-                          ? "text-blue-600 bg-blue-100 shadow-sm"
-                          : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                      `px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive
+                        ? "text-blue-600 bg-blue-100 shadow-sm"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                       }`
                     }
                   >
@@ -132,7 +132,6 @@ const Navbar = () => {
                 className="hidden lg:flex items-center gap-4 relative"
                 ref={profileMenuRef}
               >
-
                 <button
                   onClick={toggleProfileMenu}
                   className="flex items-center gap-2 focus:outline-none bg-white px-3 py-2 rounded-full shadow-sm border border-gray-100 hover:shadow-md transition-all"
@@ -151,9 +150,8 @@ const Navbar = () => {
                   />
                   <ChevronDown
                     size={16}
-                    className={`transition-transform text-blue-500 ${
-                      isProfileMenuOpen ? "rotate-180" : ""
-                    }`}
+                    className={`transition-transform text-blue-500 ${isProfileMenuOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
@@ -206,14 +204,13 @@ const Navbar = () => {
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed inset-0 z-40 transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`lg:hidden fixed inset-0 z-40 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
         ref={mobileMenuRef}
       >
         <div
@@ -222,12 +219,12 @@ const Navbar = () => {
         />
         <div className="relative flex flex-col w-4/5 max-w-sm h-full bg-white border-r border-r-gray-200 shadow-xl">
           <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
-            <Link to="/" onClick={toggleMenu}>
-              <img
-                className="h-10"
-                src={assets.logo}
-                alt="Campus Connect Logo"
-              />
+            <Link
+              to="/"
+              onClick={toggleMenu}
+              className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+            >
+              CampusConnect
             </Link>
             <button
               onClick={toggleMenu}
@@ -246,10 +243,9 @@ const Navbar = () => {
                     to={item.path}
                     onClick={toggleMenu}
                     className={({ isActive }) =>
-                      `block px-4 py-3 rounded-md text-sm font-medium ${
-                        isActive
-                          ? "bg-blue-100 text-blue-600 shadow-sm"
-                          : "text-gray-700 hover:bg-blue-50"
+                      `block px-4 py-3 rounded-md text-sm font-medium ${isActive
+                        ? "bg-blue-100 text-blue-600 shadow-sm"
+                        : "text-gray-700 hover:bg-blue-50"
                       }`
                     }
                   >
@@ -315,7 +311,7 @@ const Navbar = () => {
                   onClick={toggleMenu}
                   className="block w-full bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 text-center cursor-pointer"
                 >
-                  Login
+                  Candidate Login
                 </Link>
               </div>
             )}
@@ -323,6 +319,7 @@ const Navbar = () => {
         </div>
       </div>
     </header>
+
   );
 };
 

@@ -18,11 +18,16 @@ import ViewApplications from "./pages/ViewApplications";
 import { AppContext } from "./context/AppContext";
 import ShortListed from "./pages/ShortListed";
 import ProfileDetails from "./pages/ProfileDetails";
-
+import { useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 const App = () => {
   const { companyToken } = useContext(AppContext);
-
+  const location = useLocation();
+  const hideLayout = location.pathname.startsWith("/dashboard");
   return (
+    <>
+    {!hideLayout && <Navbar />}
     <AppLayout>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -46,6 +51,8 @@ const App = () => {
         </Route>
       </Routes>
     </AppLayout>
+     {!hideLayout && <Footer />}
+     </>
   );
 };
 

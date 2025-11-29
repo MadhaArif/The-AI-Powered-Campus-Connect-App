@@ -127,41 +127,42 @@ export const faqs = [
     id: 1,
     title: "Terms",
     description1:
-      "Nulla pharetra, ullamcorper sit lectus. Fermentum mauris pellentesque nec nibh sed et, vel diam, massa. Placerat quis vel fames interdum urna lobortis sagittis sed pretium. Aliquam eget posuere sit enim elementum nulla vulputate magna. Morbi sed arcu proin quis tortor non risus.",
+      "These are the general terms that define how you may use our website and services. Please read them carefully before accessing or using any part of our platform.",
     description2:
-      "Elementum lectus a porta commodo suspendisse arcu, aliquam lectus faucibus. Nisl malesuada tortor, ligula aliquet felis vitae enim. Mi augue aliquet mauris non elementum tincidunt eget facilisi. Pellentesque massa ipsum tempus vel aliquam massa eu pulvinar eget.",
+      "By continuing to use our site, you agree to follow all the terms and conditions listed here. We may update or change these terms at any time without prior notice.",
   },
   {
     id: 2,
     title: "Limitations",
     description1:
-      "Nulla pharetra, ullamcorper sit lectus. Fermentum mauris pellentesque nec nibh sed et, vel diam, massa. Placerat quis vel fames interdum urna lobortis sagittis sed pretium. Aliquam eget posuere sit enim elementum nulla vulputate magna. Morbi sed arcu proin quis tortor non risus.",
+      "We are not responsible for any damages that may result from the use or inability to use the materials on this website. All content is provided ‘as is’ without any warranties.",
     description2:
-      "Elementum lectus a porta commodo suspendisse arcu, aliquam lectus faucibus. Nisl malesuada tortor, ligula aliquet felis vitae enim. Mi augue aliquet mauris non elementum tincidunt eget facilisi. Pellentesque massa ipsum tempus vel aliquam massa eu pulvinar eget.",
+      "Certain limitations may apply based on your region or the type of service used. Always ensure that you use our services within the legal boundaries of your location.",
   },
   {
     id: 3,
-    title: "Revisions and Errata",
+    title: "Revisions and Corrections",
     description1:
-      "Nulla pharetra, ullamcorper sit lectus. Fermentum mauris pellentesque nec nibh sed et, vel diam, massa. Placerat quis vel fames interdum urna lobortis sagittis sed pretium. Aliquam eget posuere sit enim elementum nulla vulputate magna. Morbi sed arcu proin quis tortor non risus.",
+      "The materials on this website may include technical, typographical, or photographic errors. We do not guarantee that all information is accurate, complete, or current.",
     description2:
-      "Elementum lectus a porta commodo suspendisse arcu, aliquam lectus faucibus. Nisl malesuada tortor, ligula aliquet felis vitae enim. Mi augue aliquet mauris non elementum tincidunt eget facilisi. Pellentesque massa ipsum tempus vel aliquam massa eu pulvinar eget.",
+      "We may update, edit, or remove any content at any time without notice. However, we are not obligated to update outdated information on our site.",
   },
   {
     id: 4,
-    title: "Site Terms of Use Modifications",
+    title: "Changes to Site Terms",
     description1:
-      "Nulla pharetra, ullamcorper sit lectus. Fermentum mauris pellentesque nec nibh sed et, vel diam, massa. Placerat quis vel fames interdum urna lobortis sagittis sed pretium. Aliquam eget posuere sit enim elementum nulla vulputate magna. Morbi sed arcu proin quis tortor non risus.",
+      "We may revise these terms of use for our website at any time without prior notice. By using this website, you agree to be bound by the current version of these terms.",
     description2:
-      "Elementum lectus a porta commodo suspendisse arcu, aliquam lectus faucibus. Nisl malesuada tortor, ligula aliquet felis vitae enim. Mi augue aliquet mauris non elementum tincidunt eget facilisi. Pellentesque massa ipsum tempus vel aliquam massa eu pulvinar eget.",
+      "It is your responsibility to check this page regularly for any updates. Continued use of the site after changes means you accept those modifications.",
   },
 ];
+
 
 export const testimonials = [
   {
     title: "An Incredible Experience!",
     description:
-      "Using this platform made my job search so much easier. The recommendations were spot on and the user experience.",
+      "This platform made my job search effortless. The recommendations were perfectly matched to my skills, and the overall experience was smooth and enjoyable.",
     image: "https://placehold.co/200x200/2563eb/white?text=JL", // Jessica Lee initials
     name: "Jessica Lee",
     position: "Frontend Developer",
@@ -169,7 +170,7 @@ export const testimonials = [
   {
     title: "Highly Recommended",
     description:
-      "I found the perfect job within a week. The interface is clean and the support team is super responsive. Couldn't ask for more!",
+      "I landed my dream job within just a week! The interface is clean, intuitive, and the support team was incredibly helpful throughout the process.",
     image: "https://randomuser.me/api/portraits/men/32.jpg", // Daniel Thompson photo
     name: "Daniel Thompson",
     position: "Digital Marketing Manager",
@@ -177,7 +178,7 @@ export const testimonials = [
   {
     title: "Seamless and Efficient",
     description:
-      "From creating a profile to applying for jobs, everything was quick and easy. The listings are well curated too.",
+      "Creating a profile and applying for jobs took only minutes. The job listings are relevant, well-organized, and updated regularly — a great experience overall.",
     image: "https://placehold.co/200x200/2563eb/white?text=SA", // Sara Ahmed initials
     name: "Sara Ahmed",
     position: "UI/UX Designer",
@@ -185,12 +186,13 @@ export const testimonials = [
   {
     title: "A Game-Changer for Job Seekers",
     description:
-      "I've used many job portals before, but this one stands out with its simplicity and effectiveness. Found a great opportunity !",
+      "I’ve tried several job portals, but this one truly stands out. It’s simple, fast, and effective — I found a fantastic opportunity here!",
     image: "https://randomuser.me/api/portraits/men/75.jpg", // Kevin Brooks photo
     name: "Kevin Brooks",
     position: "Software Engineer",
   },
 ];
+
 
 export const JobCategories = [
   "Programming",

@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useCallback , useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import moment from "moment";
 
@@ -17,7 +15,8 @@ const ProfileDetails = () => {
       const { data } = await axios.get(`${backendUrl}/user/user-applications`, {
         headers: { Authorization: `Bearer ${userToken}` },
       });
-
+      // console.log('data', data.applications);
+      
       if (data.success) {
         setUserInfo(data.user);
         setApplications(data.applications || []);
@@ -28,6 +27,30 @@ const ProfileDetails = () => {
       setLoading(false);
     }
   };
+
+  // ✅ Memoized fetch function (won’t re-create unless backendUrl/userToken changes)
+  const fetchUserProfile = useCallback(async () => {
+    try {
+      const { data } = await axios.get(`${backendUrl}/user/user-data`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+
+      console.log("data", data.userData);
+
+      if (data.success && data.userData) {
+        setUserInfo(data.userData);
+      }
+    } catch (error) {
+      console.error("Profile fetch error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [backendUrl, userToken]); // only re-create if these change
+
+  // ✅ useEffect runs only once or when token/url changes
+  useEffect(() => {
+    fetchUserProfile();
+  }, [userInfo]);
 
   useEffect(() => {
     fetchUserProfileData();
@@ -43,48 +66,66 @@ const ProfileDetails = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="max-w-5xl mx-auto px-4 py-8">
         {/* --- USER PROFILE --- */}
         <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex items-center gap-6">
-            <img
-              src={userInfo?.image}
-              alt="User profile"
-              className="w-20 h-20 rounded-full object-cover"
-            />
-            <div>
-              <h2 className="text-2xl font-semibold">{userInfo?.name}</h2>
-              <p className="text-gray-600">{userInfo?.email}</p>
-              <p className="mt-1 text-sm text-gray-500">
-                {userInfo?.bio || "No bio provided"}
-              </p>
-              {userInfo?.resume && (
-                <a
-                  href={userInfo.resume}
-                  target="_blank"
-                  className="inline-block mt-2 text-blue-500 hover:underline text-sm"
-                >
-                  View Resume
-                </a>
-              )}
-            </div>
-          </div>
+  <div className="flex items-center gap-6">
+    <img
+      src={userInfo?.image}
+      alt={userInfo?.name || "User profile"}
+      className="mt-5 w-40 h-48 rounded-full object-cover border border-gray-100"
+    />
+    <div>
+      <h2 className="text-2xl font-semibold">{userInfo?.name || "User"}</h2>
+      <p className="text-gray-600">{userInfo?.email || "No email"}</p>
+      <p className="mt-1 text-sm text-gray-500">
+        {userInfo?.bio || "No bio provided"}
+      </p>
 
-          <div className="mt-4">
-            <h3 className="text-sm font-semibold mb-1">Skills:</h3>
-            <div className="flex flex-wrap gap-2">
-              {userInfo?.skills?.split(",").map((skill, i) => (
-                <span
-                  key={i}
-                  className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs"
-                >
-                  {skill.trim()}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+      {userInfo?.resume && (
+        <a
+          href={userInfo.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-2 text-blue-500 hover:underline text-sm"
+        >
+          View Resume
+        </a>
+      )}
+      {userInfo?.skills && (
+  <div className="mt-4">
+    <h3 className="text-sm font-semibold mb-1">Skills:</h3>
+    <div className="flex flex-wrap gap-2">
+      {Array.isArray(userInfo.skills)
+        ? userInfo.skills.map((skill, i) => (
+            <span
+              key={i}
+              className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs"
+            >
+              {skill}
+            </span>
+          ))
+        : userInfo.skills
+            ?.split(",")
+            .map((skill, i) => (
+              <span
+                key={i}
+                className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs"
+              >
+                {skill.trim()}
+              </span>
+            ))}
+    </div>
+  </div>
+)}
+    </div>
+  </div>
+
+ 
+
+</div>
+
 
         {/* --- APPLICATIONS LIST --- */}
         <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
@@ -161,7 +202,7 @@ const ProfileDetails = () => {
           )}
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

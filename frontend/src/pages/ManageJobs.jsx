@@ -36,8 +36,10 @@ const ManageJobs = () => {
   };
 
 
-  const changeJobVisiblity = async (id, status="Close") => {
+  const changeJobVisiblity = async (id) => {
     try {
+      console.log(companyToken);
+      
      const { data } = await axios.put(
         `${backendUrl}/company/close-job/${id}`,
         {

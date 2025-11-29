@@ -2,13 +2,14 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { faqs } from "../assets/assets";
+
 import { motion } from "framer-motion";
 import { SlideLeft, SlideUp } from "../utils/Animation";
 
 const Terms = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Header */}
         <div className="text-center mb-12">
@@ -58,7 +59,7 @@ const Terms = () => {
           </p>
         </motion.div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

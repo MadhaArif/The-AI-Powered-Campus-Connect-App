@@ -41,7 +41,7 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-gray-50 to-white border-t border-gray-200/60 mt-20">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="w-full px-6  py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
@@ -64,7 +64,7 @@ const Footer = () => {
             </p>
             
             {/* Contact Info */}
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-600">
                 <Mail className="w-4 h-4 text-blue-500" />
                 <span className="text-sm">hello@campusconnect.com</span>
@@ -77,7 +77,7 @@ const Footer = () => {
                 <MapPin className="w-4 h-4 text-blue-500" />
                 <span className="text-sm">123 Campus Drive, Edu City</span>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
@@ -130,17 +130,7 @@ const Footer = () => {
             <p className="text-gray-600 text-sm mb-4">
               Subscribe to get notified about new job opportunities and career tips.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 mb-6">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-              />
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200 whitespace-nowrap">
-                Subscribe
-              </button>
-            </div>
-            
+          
             {/* Social Links */}
             <div>
               <h4 className="text-sm font-semibold text-gray-900 mb-4">

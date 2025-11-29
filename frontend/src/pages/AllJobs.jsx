@@ -155,7 +155,7 @@ function AllJobs() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section>
         <div className="md:hidden flex justify-end mb-4">
           <button
@@ -347,7 +347,7 @@ function AllJobs() {
           </div>
         </motion.div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

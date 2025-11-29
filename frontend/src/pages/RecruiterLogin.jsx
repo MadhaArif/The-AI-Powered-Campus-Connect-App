@@ -46,9 +46,9 @@ const RecruiterLogin = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex flex-col">
-        <main className="flex-grow flex items-center justify-center px-4 py-8">
+      {/* <Navbar /> */}
+      <div className="min-h-screen flex flex-col">
+        <main className="grow flex items-center justify-center px-4 py-8">
           <div className="w-full max-w-md">
             {/* Header Card */}
             <div className="text-center mb-8">
@@ -131,11 +131,10 @@ const RecruiterLogin = () => {
                           checked={rememberMe}
                           onChange={(e) => setRememberMe(e.target.checked)}
                         />
-                        <div className={`w-5 h-5 border-2 rounded-md transition-all duration-200 flex items-center justify-center group-hover:border-blue-500 ${
-                          rememberMe 
-                            ? "bg-blue-500 border-blue-500" 
+                        <div className={`w-5 h-5 border-2 rounded-md transition-all duration-200 flex items-center justify-center group-hover:border-blue-500 ${rememberMe
+                            ? "bg-blue-500 border-blue-500"
                             : "bg-white border-gray-300"
-                        }`}>
+                          }`}>
                           {rememberMe && (
                             <div className="w-2 h-2 bg-white rounded-sm"></div>
                           )}
@@ -157,11 +156,10 @@ const RecruiterLogin = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 px-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform transition-all duration-200 flex justify-center items-center gap-2 ${
-                      loading 
-                        ? "cursor-not-allowed opacity-50" 
+                    className={`w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 px-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform transition-all duration-200 flex justify-center items-center gap-2 ${loading
+                        ? "cursor-not-allowed opacity-50"
                         : "cursor-pointer hover:from-blue-700 hover:to-indigo-700 hover:scale-105"
-                    }`}
+                      }`}
                   >
                     {loading ? (
                       <>
@@ -203,7 +201,7 @@ const RecruiterLogin = () => {
             </div>
           </div>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

@@ -16,13 +16,11 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation(); // ✅ Added this
 
-  const { companyData, companyLoading, backendUrl } = useContext(AppContext);
+  const { companyData, companyLoading, backendUrl, companyToken, userToken } = useContext(AppContext);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [notifcationAll, setNotifactionAll] = useState([]);
-  const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
-  const [companyToken, setCompanyToken] = useState(
-    localStorage.getItem("companyToken")
-  );
+ 
+
   const sidebarLinks = [
     {
       id: "manage-jobs",
@@ -38,7 +36,7 @@ const Dashboard = () => {
     },
     {
       id: "view-applications",
-      name: "View Applications",
+      name: "Apply Applicants",
       path: "/dashboard/view-applications",
       icon: assets.person_tick_icon,
     },
@@ -52,13 +50,14 @@ const Dashboard = () => {
 
   const fetchNotications = async () => {
     try {
+      // console.log("companyToken ", companyToken);
       const { data } = await axios.get(`${backendUrl}/notification/all`, {
         headers: {
           Authorization: `Bearer ${companyToken || userToken}`,
         },
       });
 
-      console.log(data);
+      console.log("==========    ",data);
 
       if (data.success) {
         setNotifactionAll(data?.notifications);
@@ -72,11 +71,13 @@ const Dashboard = () => {
   useEffect(() => {
     fetchNotications();
   }, []);
+
+  
   console.log({ notifcationAll });
   const handleClearNotifications = async (id) => {
   try {
     const { data } = await axios.put(
-      `${backendUrl}/notification/read${id}`,
+      `${backendUrl}/notification/read/${id}`,
       {}, // no body needed
       {
         headers: { Authorization: `Bearer ${companyToken || userToken}` },
@@ -109,7 +110,7 @@ const Dashboard = () => {
       location.pathname === "/dashboard" ||
       location.pathname === "/dashboard/"
     ) {
-      document.title = "Campus Connect - Job Portal | Dashboard";
+      document.title = "Campus Connect - | Dashboard";
       navigate("/dashboard/manage-jobs");
     }
   }, [location.pathname, navigate]);
@@ -189,7 +190,7 @@ const Dashboard = () => {
 
                   <div className="flex items-center justify-between p-2 border-t border-gray-100">
                     <button
-                      onClick={()=>handleClearNotifications(notif.id)}
+                      onClick={()=>handleClearNotifications("all")}
                       className="text-xs text-red-500 hover:underline"
                     >
                       Clear All

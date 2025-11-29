@@ -100,7 +100,7 @@ const ApplyJob = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section>
         <div className="flex flex-col lg:flex-row justify-between border border-blue-200 rounded-lg bg-blue-50 p-8 lg:p-12 mb-8">
           <div className="flex flex-col md:flex-row md:items-center gap-6">
@@ -207,7 +207,7 @@ const ApplyJob = () => {
           </div>
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

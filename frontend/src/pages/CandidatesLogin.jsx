@@ -47,8 +47,8 @@ const CandidatesLogin = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex flex-col">
+      {/* <Navbar /> */}
+      <div className="min-h-screen flex flex-col">
         <main className="flex-grow flex items-center justify-center px-4 py-8">
           <div className="w-full max-w-md">
             {/* Header Section */}
@@ -204,7 +204,7 @@ const CandidatesLogin = () => {
             </div>
           </div>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

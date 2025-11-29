@@ -67,7 +67,7 @@ console.log(userData);
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section>
         {/* Resume Section */}
         <div className="mb-10">
@@ -220,7 +220,7 @@ console.log(userData);
           </>
         )}
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

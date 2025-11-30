@@ -1,148 +1,182 @@
-🎓 CampusConnect - The University Talent Finder
+🎓 CampusConnect – The University Talent Finder
 
-CampusConnect is a full-stack MERN application designed to bridge the gap between students and opportunities within a university ecosystem. It acts as an intra-university job marketplace where students (Talent Seekers) can find internships, projects, and jobs, while recruiters or student organizations (Talent Finders) can post opportunities and manage applicants.
+CampusConnect is a full-stack MERN application built to connect students with on-campus opportunities. It serves as an intra-university job marketplace, enabling both students and recruiters to interact seamlessly.
+
+📌 Table of Contents
+
+Features
+
+Tech Stack
+
+Installation
+
+Environment Variables
+
+Folder Structure
+
+API Overview
+
+Contributing
+
+License
 
 🚀 Features
+👨‍💼 Recruiters (Organizations / Clubs / Companies)
 
-👨‍💼 For Recruiters (Companies/Organizers)
+Secure authentication with company logo upload
 
-Company Authentication: Secure registration and login for companies/recruiters with logo upload.
+Dashboard to manage job posts and applicants
 
-Dashboard Management: A dedicated dashboard to manage job postings and applicants.
+Create job listings with:
 
-Post Opportunities: Create detailed job posts with rich text descriptions, salary ranges, job levels (Intern, Junior, Senior), and categories.
+Rich text description
 
-Applicant Management: * View all applicants for specific jobs.
+Job levels (Intern, Junior, Senior)
 
-Access applicant profiles and resumes.
+Salary range
 
-Workflow Actions: Shortlist, Accept, or Reject candidates.
+Categories
 
-Job Control: Close job openings which automatically notifies all applicants.
+Manage applicants (view profile & resume)
 
-Analytics: View applicant counts for each posted job.
+Shortlist, Accept, Reject candidates
 
-👩‍💻 For Candidates (Students)
+Close job openings (auto-notify all applicants)
 
-Student Authentication: Secure signup and login for students.
+Analytics: View applicant count per job
 
-Profile Management: Build a profile with skills, bio, and profile picture.
+👩‍💻 Students
 
-Resume Handling: Upload and update resumes (PDF format) via Cloudinary integration.
+Secure student signup/login
 
-Smart Job Search: * Filter jobs by Category, Location, and Job Title.
+Complete profile setup (skills, bio, picture)
 
-AI-like Recommendations: Get personalized job recommendations based on skill matching scores.
+Upload & update resume (PDF, Cloudinary storage)
 
-Application Tracking: Apply for jobs and track status updates (Pending, Shortlisted, Accepted, Rejected) in real-time.
+Smart job search (filter by Category, Title, Location)
 
-🔔 General Features
+Job recommendations based on skill matching
 
-Notification System: Real-time notifications for application status changes (for students) and new applications (for recruiters).
+Track application status:
 
-Responsive Design: Fully responsive UI built with Tailwind CSS, ensuring compatibility across mobile and desktop.
+Pending
 
-Interactive UI: Smooth animations and loading states for a polished user experience.
+Shortlisted
 
-🛠️ Tech Stack
+Accepted
 
+Rejected
+
+🔔 Global Features
+
+Real-time notification system
+
+Fully responsive UI (Tailwind CSS)
+
+Smooth animations (Framer Motion)
+
+Clean and modern UI with skeleton loaders
+
+🛠 Tech Stack
 Frontend
 
-Framework: React.js
+React.js
 
-Styling: Tailwind CSS
+Tailwind CSS
 
-State Management: Context API
+Context API
 
-Routing: React Router
+React Router
 
-Animations: Framer Motion
+Framer Motion
 
 Backend
 
-Runtime: Node.js
+Node.js
 
-Framework: Express.js
+Express.js
 
-Database: MongoDB
+MongoDB
 
-Authentication: JWT
+JWT Authentication
 
-File Storage: Cloudinary
+Cloudinary (file uploads)
 
-⚙️ Installation & Setup
+⚙ Installation
 
-Follow these steps to set up the project locally.
-
-Prerequisites
-
-Node.js installed
-
-MongoDB installed or a MongoDB Atlas connection string
-
-Cloudinary Account (for file uploads)
+Follow the steps below to run the project locally:
 
 1. Clone the Repository
-
-git clone [https://github.com/your-username/campusconnect.git](https://github.com/your-username/campusconnect.git)
-cd campusconnect
-
-
+git clone https://github.com/your-username/CampusConnect.git
+cd CampusConnect
 
 2. Backend Setup
-
-Navigate to the backend folder and install dependencies:
-
 cd backend
 npm install
 
 
-
-Create a .env file in the backend directory and configure the following services:
-
-Database: Connection string for MongoDB.
-
-Authentication: Secret key for JWT signing.
-
-Storage: API credentials for Cloudinary.
-
-Server: Port configuration.
-
-Start the backend server:
+Run backend locally:
 
 npm run dev
-
-
 
 3. Frontend Setup
-
-Open a new terminal, navigate to the frontend folder, and install dependencies:
-
 cd ../frontend
 npm install
-
-
-
-Create a .env file in the frontend directory and configure the API base URL to point to your running backend server.
-
-Start the frontend development server:
-
 npm run dev
+
+
+Your project will run at:
+👉 http://localhost:5173/
+
+🔐 Environment Variables
+Backend .env
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+PORT=5000
+
+Frontend .env
+VITE_API_URL=http://localhost:5000
+
+📁 Folder Structure
+CampusConnect/
+│
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   └── server.js
+│
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── context/
+    │   ├── hooks/
+    │   └── App.jsx
+
+📡 API Overview (short)
+
+/api/auth/student – student register/login
+
+/api/auth/company – company register/login
+
+/api/jobs – create & fetch job posts
+
+/api/applications – apply, shortlist, accept, reject
+
+/api/notifications – real-time notifications
 
 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+Contributions are welcome!
 
-Fork the repository.
+git checkout -b feature/YourFeature
+git commit -m "Add new feature"
+git push origin feature/YourFeature
 
-Create a new branch (git checkout -b feature/YourFeature).
 
-Commit your changes (git commit -m 'Add some feature').
-
-Push to the branch (git push origin feature/YourFeature).
-
-Open a Pull Request.
-
-📄 License
-
-This project is licensed under the MIT License.
+Then open a Pull Request.

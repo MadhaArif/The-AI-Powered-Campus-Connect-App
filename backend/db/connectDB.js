@@ -9,7 +9,13 @@ const connectDB = async () => {
 
     console.log("⏳ Connecting to MongoDB...");
 
-    await mongoose.connect(process.env.DATABASE_CONNECTION_URL, {
+    const uri = process.env.DATABASE_CONNECTION_URL;
+    if (!uri || typeof uri !== "string" || !uri.trim()) {
+      console.warn("⚠️ DATABASE_CONNECTION_URL missing. Skipping DB connection for now.");
+      return;
+    }
+
+    await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 10000,
@@ -19,7 +25,7 @@ const connectDB = async () => {
     console.log("✅ MongoDB connected successfully");
   } catch (error) {
     console.error("❌ Database connection failed:", error.message);
-    throw new Error("Database connection error");
+    console.warn("⚠️ Continuing without database connection (dev mode)");
   }
 };
 

@@ -32,7 +32,7 @@ const Counter = () => {
               className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6"
             >
               Millions of Jobs. Find the one that{" "}
-              <span className="text-blue-600">suits you.</span>
+              <span className="text-indigo-600">suits you.</span>
             </motion.h1>
             <motion.p
               variants={SlideUp(0.5)}
@@ -73,7 +73,7 @@ const Counter = () => {
               variants={SlideUp(0.6)}
               initial="hidden"
               whileInView="visible"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors "
+              className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-colors shadow-md hover:shadow-lg"
             >
               Get Started
             </motion.button>
@@ -84,41 +84,21 @@ const Counter = () => {
       {/* Stats Counter Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
         <div className="text-center p-4">
-          <div className="text-4xl font-bold text-blue-600 mb-2">
-            <CountUp
-              start={1}
-              end={898}
-              duration={3}
-              enableScrollSpy={true}
-              scrollSpyOnce={false}
-            />
+          <div className="text-4xl font-bold text-indigo-600 mb-2">
+            <CountUp start={1} end={898} duration={3} />
             <span>K</span>
           </div>
           <span className="text-gray-600">Daily active users</span>
         </div>
         <div className="text-center p-4">
-          <div className="text-4xl font-bold text-blue-600 mb-2">
-            <CountUp
-              start={1}
-              end={298}
-              duration={3}
-              enableScrollSpy={true}
-              scrollSpyOnce={false}
-              suffix="+"
-            />
+          <div className="text-4xl font-bold text-indigo-600 mb-2">
+            <CountUp start={1} end={298} duration={3} suffix="+" />
           </div>
           <span className="text-gray-600">Open job positions</span>
         </div>
         <div className="text-center p-4">
-          <div className="text-4xl font-bold text-blue-600 mb-2">
-            <CountUp
-              start={1}
-              end={20000}
-              duration={3}
-              enableScrollSpy={true}
-              scrollSpyOnce={false}
-              suffix="+"
-            />
+          <div className="text-4xl font-bold text-indigo-600 mb-2">
+            <CountUp start={1} end={20000} duration={3} suffix="+" />
           </div>
           <span className="text-gray-600">Stories shared</span>
         </div>

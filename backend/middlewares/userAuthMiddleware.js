@@ -24,9 +24,13 @@ const hybridAuth = async (req, res, next) => {
     if (!account)
       return res.status(404).json({ success: false, message: "Account not found." });
 
-    // ✅ Attach to req for next middleware/controller
-    req.userData = account;  // <-- changed this key
+    req.accountData = account;
     req.accountType = accountType;
+    if (accountType === "user") {
+      req.userData = account;
+    } else {
+      req.companyData = account;
+    }
 
     next();
   } catch (err) {

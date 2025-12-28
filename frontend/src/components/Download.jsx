@@ -13,7 +13,7 @@ const Download = () => {
             variants={SlideUp(0.5)}
             initial="hidden"
             whileInView="visible"
-            className="text-lg font-semibold text-blue-600 uppercase tracking-wider"
+            className="text-lg font-semibold text-indigo-600 uppercase tracking-wider"
           >
             Download & Enjoy
           </motion.h3>
@@ -23,7 +23,7 @@ const Download = () => {
             whileInView="visible"
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight"
           >
-            Get the Campus Connect <span className="text-blue-600">Job Search</span>{" "}
+            Get the Campus Connect <span className="text-indigo-600">Job Search</span>{" "}
             App
           </motion.h1>
           <motion.p

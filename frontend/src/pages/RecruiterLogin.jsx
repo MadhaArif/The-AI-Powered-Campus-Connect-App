@@ -54,13 +54,13 @@ const RecruiterLogin = () => {
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
                 <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
                     <Building2 className="w-8 h-8 text-white" />
                   </div>
-                  <div className="absolute -inset-2 bg-blue-500/20 rounded-2xl blur-lg opacity-0 animate-pulse"></div>
+                  <div className="absolute -inset-2 bg-indigo-500/20 rounded-2xl blur-lg opacity-0 animate-pulse"></div>
                 </div>
               </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2">
                 Recruiter Login
               </h1>
               <p className="text-gray-600 text-sm">
@@ -69,7 +69,7 @@ const RecruiterLogin = () => {
             </div>
 
             {/* Login Card */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/60 overflow-hidden">
+            <div className="glass-panel rounded-2xl overflow-hidden">
               <div className="p-8">
                 <form className="space-y-6" onSubmit={recruiterLogin}>
                   {/* Email Field */}
@@ -79,11 +79,14 @@ const RecruiterLogin = () => {
                       Email Address
                     </label>
                     <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
+                        <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                      </div>
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-0 group-focus-within:opacity-20 transition-opacity duration-300"></div>
                       <input
                         type="email"
                         placeholder="Enter your company email"
-                        className="relative w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm placeholder-gray-400"
+                        className="relative w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm placeholder-gray-400 pl-12"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -98,11 +101,14 @@ const RecruiterLogin = () => {
                       Password
                     </label>
                     <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
+                        <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                      </div>
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-0 group-focus-within:opacity-20 transition-opacity duration-300"></div>
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
-                        className="relative w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm placeholder-gray-400 pr-12"
+                        className="relative w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm placeholder-gray-400 pl-12 pr-12"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -131,10 +137,11 @@ const RecruiterLogin = () => {
                           checked={rememberMe}
                           onChange={(e) => setRememberMe(e.target.checked)}
                         />
-                        <div className={`w-5 h-5 border-2 rounded-md transition-all duration-200 flex items-center justify-center group-hover:border-blue-500 ${rememberMe
-                            ? "bg-blue-500 border-blue-500"
+                        <div className={`w-5 h-5 border-2 rounded-md transition-all duration-200 flex items-center justify-center group-hover:border-indigo-500 ${
+                          rememberMe 
+                            ? "bg-gradient-to-r from-indigo-600 to-blue-600 border-transparent" 
                             : "bg-white border-gray-300"
-                          }`}>
+                        }`}>
                           {rememberMe && (
                             <div className="w-2 h-2 bg-white rounded-sm"></div>
                           )}
@@ -146,7 +153,7 @@ const RecruiterLogin = () => {
                     </label>
                     <Link
                       to="/forgot-password"
-                      className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors hover:underline"
+                      className="text-sm text-indigo-600 hover:text-indigo-700 font-medium transition-colors hover:underline"
                     >
                       Forgot Password?
                     </Link>
@@ -156,9 +163,9 @@ const RecruiterLogin = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 px-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform transition-all duration-200 flex justify-center items-center gap-2 ${loading
+                    className={`w-full btn-primary flex justify-center items-center gap-2 ${loading
                         ? "cursor-not-allowed opacity-50"
-                        : "cursor-pointer hover:from-blue-700 hover:to-indigo-700 hover:scale-105"
+                        : "cursor-pointer"
                       }`}
                   >
                     {loading ? (
@@ -180,7 +187,7 @@ const RecruiterLogin = () => {
                       Don't have a recruiter account?{" "}
                       <Link
                         to="/recruiter-signup"
-                        className="text-blue-600 hover:text-blue-700 font-semibold transition-colors hover:underline inline-flex items-center gap-1"
+                        className="text-indigo-600 hover:text-indigo-700 font-semibold transition-colors hover:underline inline-flex items-center gap-1"
                       >
                         Create Account
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

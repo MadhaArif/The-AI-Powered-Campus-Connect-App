@@ -160,7 +160,7 @@ function AllJobs() {
         <div className="md:hidden flex justify-end mb-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+            className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-5 py-2.5 rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all shadow-md shadow-indigo-200"
           >
             <Filter size={18} />
             {showFilters ? "Hide Filters" : "Show Filters"}
@@ -175,56 +175,58 @@ function AllJobs() {
         >
           {/* Filters */}
           <div
-            className={`lg:w-1/4 p-4 rounded-lg border border-gray-200 ${
+            className={`lg:w-1/4 h-fit sticky top-24 bg-white p-6 rounded-xl border border-gray-100 shadow-sm ${
               showFilters ? "block" : "hidden md:block"
             }`}
           >
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                  Job Title
+                <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
+                  Search
                 </h2>
-                <input
-                  type="text"
-                  name="title"
-                  value={searchInput.title}
-                  onChange={handleSearchChange}
-                  placeholder="Enter title"
-                  className="w-full border border-gray-300 rounded-md px-4 py-2"
-                />
+                <div className="space-y-3">
+                  <div>
+                    <label className="text-xs font-semibold text-gray-500 mb-1 block">Job Title</label>
+                    <input
+                      type="text"
+                      name="title"
+                      value={searchInput.title}
+                      onChange={handleSearchChange}
+                      placeholder="e.g. Frontend Developer"
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-gray-500 mb-1 block">Location</label>
+                    <input
+                      type="text"
+                      name="location"
+                      value={searchInput.location}
+                      onChange={handleSearchChange}
+                      placeholder="e.g. Remote"
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 outline-none transition-all"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                  Job Location
+                <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
+                  Category
                 </h2>
-                <input
-                  type="text"
-                  name="location"
-                  value={searchInput.location}
-                  onChange={handleSearchChange}
-                  placeholder="Enter location"
-                  className="w-full border border-gray-300 rounded-md px-4 py-2"
-                />
-              </div>
-
-              <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                  Categories
-                </h2>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {JobCategories.map((cat, i) => (
-                    <li key={i} className="flex items-center">
+                    <li key={i} className="flex items-center group cursor-pointer">
                       <input
                         type="checkbox"
                         id={`cat-${i}`}
                         checked={searchInput.selectedCategories.includes(cat)}
                         onChange={() => handleCategoryToggle(cat)}
-                        className="h-4 w-4"
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer accent-indigo-600"
                       />
                       <label
                         htmlFor={`cat-${i}`}
-                        className="ml-2 text-gray-700"
+                        className="ml-3 text-sm text-gray-600 group-hover:text-indigo-600 transition-colors cursor-pointer select-none"
                       >
                         {cat}
                       </label>
@@ -234,22 +236,22 @@ function AllJobs() {
               </div>
 
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
                   Locations
                 </h2>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {JobLocations.map((loc, i) => (
-                    <li key={i} className="flex items-center">
+                    <li key={i} className="flex items-center group cursor-pointer">
                       <input
                         type="checkbox"
                         id={`loc-${i}`}
                         checked={searchInput.selectedLocations.includes(loc)}
                         onChange={() => handleLocationToggle(loc)}
-                        className="h-4 w-4"
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer accent-indigo-600"
                       />
                       <label
                         htmlFor={`loc-${i}`}
-                        className="ml-2 text-gray-700"
+                        className="ml-3 text-sm text-gray-600 group-hover:text-indigo-600 transition-colors cursor-pointer select-none"
                       >
                         {loc}
                       </label>
@@ -262,23 +264,25 @@ function AllJobs() {
 
           {/* Job Cards */}
           <div className="lg:w-3/4">
-            <div className="mb-6">
-              <h1 className="text-2xl font-bold text-gray-700 capitalize mb-2">
-                {category === "all"
-                  ? "Latest All Jobs"
-                  : `Jobs in ${
-                      category.charAt(0).toUpperCase() + category.slice(1)
-                    }`}
-                {filteredJobs.length > 0 && (
-                  <span className="ml-2 text-gray-500 text-lg">
-                    ({filteredJobs.length}{" "}
-                    {filteredJobs.length === 1 ? "job" : "jobs"})
-                  </span>
-                )}
-              </h1>
-              <p className="text-gray-600">
-                Get your desired job from top companies
-              </p>
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 capitalize tracking-tight">
+                  {category === "all"
+                    ? "Latest Jobs"
+                    : `Jobs in ${
+                        category.charAt(0).toUpperCase() + category.slice(1)
+                      }`}
+                </h1>
+                <p className="text-gray-500 mt-1">
+                  Find your dream job from top university recruiters
+                </p>
+              </div>
+              
+              {filteredJobs.length > 0 && (
+                <span className="inline-flex items-center px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 font-semibold text-sm border border-indigo-100 shadow-sm">
+                  {filteredJobs.length} {filteredJobs.length === 1 ? "Opportunity" : "Opportunities"} Found
+                </span>
+              )}
             </div>
 
             <motion.div
@@ -290,16 +294,19 @@ function AllJobs() {
               {paginatedJobs.length > 0 ? (
                 paginatedJobs.map((job, i) => <JobCard key={i} job={job} />)
               ) : (
-                <div className="text-center bg-white p-6 border border-gray-200 rounded-md">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                <div className="text-center glass-panel py-12 px-6 rounded-2xl">
+                  <div className="w-16 h-16 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Filter size={32} />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
                     No jobs found
                   </h3>
-                  <p className="text-gray-500 mb-3">
-                    Try adjusting your search filters.
+                  <p className="text-gray-500 mb-6 max-w-sm mx-auto">
+                    We couldn't find any jobs matching your current filters. Try removing some filters or search for something else.
                   </p>
                   <button
                     onClick={clearAllFilters}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                    className="btn-primary"
                   >
                     Clear All Filters
                   </button>
@@ -314,7 +321,7 @@ function AllJobs() {
                     setCurrentPage((prev) => Math.max(prev - 1, 1))
                   }
                   disabled={currentPage === 1}
-                  className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 text-gray-700"
+                  className="p-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-gray-600 hover:text-indigo-600 transition-all duration-300"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -323,10 +330,10 @@ function AllJobs() {
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-10 h-10 rounded-md border text-center cursor-pointer ${
+                    className={`w-10 h-10 rounded-xl border text-center font-semibold transition-all duration-300 ${
                       currentPage === i + 1
-                        ? "bg-blue-50 text-blue-500 border-blue-300"
-                        : "bg-white border-gray-300 text-gray-700 hover:bg-gray-100"
+                        ? "bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-200"
+                        : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900"
                     }`}
                   >
                     {i + 1}
@@ -338,7 +345,7 @@ function AllJobs() {
                     setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                   }
                   disabled={currentPage === totalPages}
-                  className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50 text-gray-700"
+                  className="p-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-gray-600 hover:text-indigo-600 transition-all duration-300"
                 >
                   <ChevronRight size={20} />
                 </button>

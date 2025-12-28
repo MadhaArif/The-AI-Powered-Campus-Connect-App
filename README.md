@@ -54,3 +54,38 @@ CampusConnect is a MERN-stack application that serves as an intra-university job
 ```bash
 git clone https://github.com/your-username/CampusConnect.git
 cd CampusConnect
+```
+
+### 2. Environment Setup
+- Backend: copy `backend/.env.example` to `backend/.env` and fill values:
+  - `DATABASE_CONNECTION_URL` (MongoDB)
+  - `JWT_SECRET`
+  - `CLOUDINARY_*` keys
+  - optional: `CORS_ORIGINS`, `GEMINI_*`
+- Frontend: for production, set `frontend/.env` with:
+  - `VITE_BACKEND_URL=https://your-api.example.com`
+  - Dev uses a proxy automatically.
+
+### 3. Development
+- Start backend:
+  ```bash
+  cd backend
+  node app.js
+  ```
+  The server logs “Server running on port 5000”.
+- Start frontend:
+  ```bash
+  cd ../frontend
+  node ./node_modules/vite/bin/vite.js
+  ```
+  Open `http://localhost:5173/`.
+
+### Dev Proxy
+- In dev, frontend uses same-origin calls via `/api`:
+  - `frontend/vite.config.js` proxies `/api` → `http://localhost:5000`
+  - API calls use `'/api'` automatically when `import.meta.env.DEV` is true.
+  - In production, it uses `VITE_BACKEND_URL`.
+
+### Notes
+- If backend is offline, a banner appears in the app indicating “Backend offline”.
+- Ensure the backend env variables are set correctly; otherwise MongoDB connection will fail.

@@ -22,7 +22,7 @@ const JobCategory = () => {
     <section className="mt-24">
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-700 mb-2">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2">
           Popular Job Categories
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -35,7 +35,7 @@ const JobCategory = () => {
         variants={SlideLeft(0.3)}
         initial="hidden"
         whileInView={"visible"}
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6"
       >
         {Array.isArray(categoryIcon) &&
           categoryIcon.map((icon, index) => {
@@ -50,20 +50,20 @@ const JobCategory = () => {
                 tabIndex={0}
                 role="button"
                 aria-pressed={isActive}
-                className={`relative group bg-white p-4 md:p-6 rounded-lg md:rounded-md border border-gray-100 hover:border-gray-200 shadow hover:shadow-md cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
-                  isActive ? "scale-[0.98] bg-blue-50 border-blue-200" : ""
+                className={`relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 cursor-pointer transition-all duration-300 flex flex-col items-center text-center border border-gray-50 ${
+                  isActive ? "scale-[0.98] ring-2 ring-indigo-500" : "hover:-translate-y-1"
                 }`}
               >
-                <div className="bg-blue-50 p-3 rounded-full mb-3 md:mb-4 transition-transform group-hover:scale-105">
+                <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white duration-300 shadow-sm">
                   <img
-                    className="w-7 h-7 md:w-8 md:h-8"
+                    className="w-7 h-7 md:w-8 md:h-8 group-hover:invert group-hover:brightness-0 transition-all"
                     src={icon.icon}
                     alt={icon.name}
                     title={icon.name}
                     loading="lazy"
                   />
                 </div>
-                <span className="font-medium text-gray-700 text-sm">
+                <span className="font-semibold text-gray-700 text-sm group-hover:text-indigo-600 transition-colors">
                   {icon.name}
                 </span>
               </div>

@@ -81,136 +81,185 @@ const AddJob = () => {
   }, []);
 
   return (
-    <section className="mr-1 mb-6">
-      <form onSubmit={postJob}>
-        {/* Job Title */}
-        <div className="mb-6">
-          <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
-            Job Title
-          </label>
-          <input
-            type="text"
-            placeholder="Enter job title"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
+    <section className="bg-gray-50/30 min-h-screen py-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-8">
+           <h1 className="text-2xl font-bold text-gray-800">Post a New Job</h1>
+           <p className="text-gray-500 mt-1">Create a job listing to find the best talent</p>
         </div>
 
-        {/* Job Description */}
-        <div className="mb-6">
-          <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
-            Job Description
-          </label>
-          <div
-            ref={editorRef}
-            style={{
-              minHeight: "150px",
-              border: "1px solid #ccc",
-              borderRadius: "8px",
-              padding: "10px",
-            }}
-          />
-        </div>
+        <form onSubmit={postJob} className="space-y-6">
+          <div className="glass-panel rounded-2xl p-6 md:p-8">
+             {/* Job Title */}
+             <div className="mb-8">
+               <label className="block text-gray-700 font-semibold mb-2">
+                 Job Title
+               </label>
+               <input
+                 type="text"
+                 placeholder="e.g. Senior Frontend Developer"
+                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+                 value={title}
+                 onChange={(e) => setTitle(e.target.value)}
+                 required
+               />
+             </div>
 
-        {/* Form Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {/* Job Category */}
-          <div>
-            <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
-              Job Category
-            </label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+             {/* Job Description */}
+             <div className="mb-8">
+               <label className="block text-gray-700 font-semibold mb-2">
+                 Job Description
+               </label>
+               <div className="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-500 transition-all">
+                  <div
+                    ref={editorRef}
+                    className="bg-white min-h-[200px]"
+                    style={{
+                      border: "none",
+                    }}
+                  />
+               </div>
+               <p className="text-xs text-gray-500 mt-2 text-right">Detailed description helps candidates understand the role better.</p>
+             </div>
+
+             {/* Form Grid */}
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+               {/* Job Category */}
+               <div>
+                 <label className="block text-gray-700 font-semibold mb-2">
+                   Job Category
+                 </label>
+                 <div className="relative">
+                    <select
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="Programming">Programming</option>
+                      <option value="Data Science">Data Science</option>
+                      <option value="Designing">Designing</option>
+                      <option value="Networking">Networking</option>
+                      <option value="Management">Management</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Cybersecurity">Cybersecurity</option>
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                       </svg>
+                    </div>
+                 </div>
+               </div>
+
+               {/* Job Location */}
+               <div>
+                 <label className="block text-gray-700 font-semibold mb-2">
+                   Job Location
+                 </label>
+                 <div className="relative">
+                    <select
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="Karachi">Karachi</option>
+                      <option value="Lahore">Lahore</option>
+                      <option value="Islamabad">Islamabad</option>
+                      <option value="Rawalpindi">Rawalpindi</option>
+                      <option value="Faisalabad">Faisalabad</option>
+                      <option value="Multan">Multan</option>
+                      <option value="Peshawar">Peshawar</option>
+                      <option value="Quetta">Quetta</option>
+                      <option value="Sialkot">Sialkot</option>
+                      <option value="Hyderabad">Hyderabad</option>
+                      <option value="Gujranwala">Gujranwala</option>
+                      <option value="Mardan">Mardan</option>
+                      <option value="Sahiwal">Sahiwal</option>
+                      <option value="Okara">Okara</option>
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                       </svg>
+                    </div>
+                 </div>
+               </div>
+
+               {/* Job Level */}
+               <div>
+                 <label className="block text-gray-700 font-semibold mb-2">
+                   Job Level
+                 </label>
+                 <div className="relative">
+                    <select
+                      value={level}
+                      onChange={(e) => setLevel(e.target.value)}
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="Beginner">Intern</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Senior">Senior</option>
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                       </svg>
+                    </div>
+                 </div>
+               </div>
+
+               {/* Salary */}
+               <div>
+                 <label className="block text-gray-700 font-semibold mb-2">
+                   Salary Range
+                 </label>
+                 <input
+                   type="number"
+                   placeholder="e.g. 50000"
+                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+                   value={salary}
+                   onChange={(e) => setSalary(e.target.value)}
+                   required
+                 />
+               </div>
+             </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-end gap-4">
+            <button
+              type="button"
+              onClick={() => {
+                setTitle("");
+                setDescription("");
+                setCategory("Programming");
+                setLocation("Dhaka");
+                setLevel("Intermediate");
+                setSalary("");
+                if (quillRef.current) quillRef.current.root.innerHTML = "";
+              }}
+              className="btn-outline"
             >
-              <option value="Programming">Programming</option>
-              <option value="Data Science">Data Science</option>
-              <option value="Designing">Designing</option>
-              <option value="Networking">Networking</option>
-              <option value="Management">Management</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Cybersecurity">Cybersecurity</option>
-            </select>
-          </div>
-
-          {/* Job Location */}
-          <div>
-            <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
-              Job Location
-            </label>
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              Clear
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-primary flex items-center justify-center gap-2"
             >
-              <option value="Karachi">Karachi</option>
-              <option value="Lahore">Lahore</option>
-              <option value="Islamabad">Islamabad</option>
-              <option value="Rawalpindi">Rawalpindi</option>
-              <option value="Faisalabad">Faisalabad</option>
-              <option value="Multan">Multan</option>
-              <option value="Peshawar">Peshawar</option>
-              <option value="Quetta">Quetta</option>
-              <option value="Sialkot">Sialkot</option>
-              <option value="Hyderabad">Hyderabad</option>
-              <option value="Gujranwala">Gujranwala</option>
-              <option value="Mardan">Mardan</option>
-              <option value="Sahiwal">Sahiwal</option>
-              <option value="Okara">Okara</option>
-            </select>
+              {loading ? (
+                <>
+                  <LoaderCircle className="animate-spin h-5 w-5" />
+                  <span>Posting Job...</span>
+                </>
+              ) : (
+                "Post Job"
+              )}
+            </button>
           </div>
-
-          {/* Job Level */}
-          <div>
-            <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
-              Job Level
-            </label>
-            <select
-              value={level}
-              onChange={(e) => setLevel(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="Beginner">Intern</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Senior">Senior</option>
-            </select>
-          </div>
-
-          {/* Salary */}
-          <div>
-            <label className="block text-gray-800 text-lg font-semibold mb-3 pb-1 border-b border-gray-200">
-              Salary
-            </label>
-            <input
-              type="number"
-              placeholder="Enter salary range"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              value={salary}
-              onChange={(e) => setSalary(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-8 font-semibold rounded ${
-            loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-          }`}
-        >
-          {loading ? (
-            <LoaderCircle className="animate-spin h-5 w-5 mx-auto" />
-          ) : (
-            "Add Job"
-          )}
-        </button>
-      </form>
+        </form>
+      </div>
     </section>
   );
 };

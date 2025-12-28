@@ -5,12 +5,14 @@ import { toast } from "react-hot-toast";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl =
+    import.meta.env.VITE_BACKEND_URL || "/api";
 
   const [searchFilter, setSearchFilter] = useState({ title: "", location: "" });
   const [isSearched, setIsSearched] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [jobLoading, setJobLoading] = useState(false);
+  const [backendOnline, setBackendOnline] = useState(true);
 
   const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
   const [userData, setUserData] = useState(null);
@@ -42,6 +44,10 @@ export const AppContextProvider = ({ children }) => {
     }
   }, [companyToken]);
 
+  const isNetworkError = (error) =>
+    error?.code === "ERR_NETWORK" ||
+    /Network Error|ERR_CONNECTION_REFUSED|ECONNREFUSED/i.test(error?.message || "");
+
   const fetchUserData = async () => {
     if (!userToken) return;
     setUserDataLoading(true);
@@ -53,13 +59,16 @@ export const AppContextProvider = ({ children }) => {
       });
       if (data.success) {
         setUserData(data.userData);
+        setBackendOnline(true);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Failed to fetch user data."
-      );
+      if (isNetworkError(error)) {
+        setBackendOnline(false);
+      } else {
+        toast.error(error?.response?.data?.message || "Failed to fetch user data.");
+      }
     } finally {
       setUserDataLoading(false);
     }
@@ -74,13 +83,16 @@ export const AppContextProvider = ({ children }) => {
       });
       if (data.success) {
         setCompanyData(data.companyData);
+        setBackendOnline(true);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Failed to fetch company data."
-      );
+      if (isNetworkError(error)) {
+        setBackendOnline(false);
+      } else {
+        toast.error(error?.response?.data?.message || "Failed to fetch company data.");
+      }
     } finally {
       setIsCompanyLoading(false);
     }
@@ -92,11 +104,17 @@ export const AppContextProvider = ({ children }) => {
       const { data } = await axios.get(`${backendUrl}/job/all-jobs`);
       if (data.success) {
         setJobs(data.jobs);
+        setBackendOnline(true);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to fetch jobs.");
+      if (isNetworkError(error)) {
+        setBackendOnline(false);
+      } else {
+        toast.error(error?.response?.data?.message || "Failed to fetch jobs.");
+      }
+      setJobs([]);
     } finally {
       setJobLoading(false);
     }
@@ -105,10 +123,8 @@ export const AppContextProvider = ({ children }) => {
   const fetchUserApplication = async () => {
     try {
       setApplicationsLoading(true);
-return
-      const { data } = await axios.post(
-        `${backendUrl}/user/get-user-applications`,
-        {},
+      const { data } = await axios.get(
+        `${backendUrl}/user/user-applications`,
         {
           headers: {
             token: userToken,
@@ -118,11 +134,16 @@ return
 
       if (data.success) {
         setUserApplication(data.jobApplications);
+        setBackendOnline(true);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      if (isNetworkError(error)) {
+        setBackendOnline(false);
+      } else {
+        toast.error(error?.response?.data?.message);
+      }
     } finally {
       setApplicationsLoading(false);
     }
@@ -133,6 +154,24 @@ return
       fetchUserApplication();
     }
   }, []);
+
+  useEffect(() => {
+    let timerId;
+    const start = () => {
+      timerId = setInterval(async () => {
+        try {
+          await axios.get(`${backendUrl}/`, { timeout: 3000 });
+          setBackendOnline(true);
+        } catch (err) {
+          setBackendOnline(false);
+        }
+      }, 15000);
+    };
+    start();
+    return () => {
+      if (timerId) clearInterval(timerId);
+    };
+  }, [backendUrl]);
 
   useEffect(() => {
     fetchJobsData();
@@ -195,7 +234,24 @@ return
     companyLoading,
     userApplication,
     applicationsLoading,
-    fetchUserApplication
+    fetchUserApplication,
+    backendOnline,
+    pingBackend: async () => {
+      try {
+        // Try primary base
+        await axios.get(`${backendUrl}/`, { timeout: 3000 });
+        setBackendOnline(true);
+      } catch {
+        // Fallback to direct localhost in dev
+        const fallback = "http://127.0.0.1:5001";
+        try {
+          await axios.get(`${fallback}/`, { timeout: 3000 });
+          setBackendOnline(true);
+        } catch {
+          setBackendOnline(false);
+        }
+      }
+    }
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

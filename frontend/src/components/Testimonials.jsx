@@ -33,7 +33,7 @@ const Testimonials = () => {
           clickable: true,
           bulletClass:
             "swiper-pagination-bullet !bg-gray-300 !opacity-100 !w-2.5 !h-2.5 !mx-1.5",
-          bulletActiveClass: "!bg-blue-600 !w-3 !h-3",
+          bulletActiveClass: "!bg-indigo-600 !w-3 !h-3",
           renderBullet: (index, className) => {
             return `<span class="${className}" role="button" aria-label="Go to testimonial ${
               index + 1

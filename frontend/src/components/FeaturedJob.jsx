@@ -15,7 +15,7 @@ const FeaturedJob = () => {
       {" "}
       {/* ✅ Changed from mt-26 to valid Tailwind class */}
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-700 mb-2">Featured Jobs</h1>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2">Featured Jobs</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Know your worth and find the job that qualifies your life
         </p>
@@ -53,7 +53,7 @@ const FeaturedJob = () => {
                 navigate("/all-jobs/all");
                 window.scrollTo(0, 0);
               }}
-              className="bg-blue-600 text-white px-8 py-2.5 rounded-md hover:bg-blue-700 transition duration-200 cursor-pointer"
+              className="btn-primary"
             >
               See more
             </button>

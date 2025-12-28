@@ -69,7 +69,7 @@ connectDB();
 Cloudinary();
 
 
-app.get("/", (req, res) => res.send("✅ API is working fine on Vercel"));
+// Removed: app.get("/", (req, res) => res.send("✅ API is working fine on Vercel"));
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -111,6 +111,17 @@ io.on("connection", (socket) => {
   socket.on("answerCall", (data) => {
     io.to(data.to).emit("callAccepted", data.signal);
   });
+});
+
+// Move this API check to a specific route
+app.get("/api/status", (req, res) => res.send("✅ API is working fine"));
+
+// Serve static files from the frontend dist directory
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+// Handle all other routes by serving index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 const PORT = process.env.PORT || 5000;

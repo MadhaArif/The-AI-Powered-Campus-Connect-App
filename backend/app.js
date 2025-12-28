@@ -88,7 +88,7 @@ const routes = [
   { path: "/events", route: eventRoutes },
   { path: "/ats", route: atsRoutes },
   { path: "/resume", route: resumeRoutes },
-  { path: "/", route: chatRoutes },
+  { path: "/chat", route: chatRoutes },
 ];
 
 routes.forEach((r) => {

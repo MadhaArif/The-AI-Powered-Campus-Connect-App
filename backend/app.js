@@ -128,7 +128,8 @@ const PORT = process.env.PORT || 5000;
 
 // Local or standard server environment (Railway, Heroku, Localhost)
 if (!process.env.VERCEL) {
-  server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  // Explicitly bind to 0.0.0.0 for Docker/Railway environments
+  server.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
 } else {
    console.log("🚀 Running in Vercel Serverless Mode");
 }

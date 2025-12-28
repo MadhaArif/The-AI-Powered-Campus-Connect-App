@@ -126,21 +126,11 @@ app.get("*", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-
-// If we are in Heroku (or any environment where NODE_ENV=production),
-// we might want to ensure we aren't just relying on VERCEL env var for listening.
-// However, the existing logic:
-// if (process.env.VERCEL) { ... } else { server.listen(...) }
-// is actually fine for Heroku because Heroku doesn't set VERCEL=1.
-// So it will fall into the else block and listen on process.env.PORT.
-// No changes needed for this block specifically for Heroku compatibility.
-
-if (process.env.VERCEL) {
-  // Vercel serverless environment: export app, do not listen
-  console.log("🚀 Running in Vercel Serverless Mode");
-} else {
-  // Local or standard server environment
+// Local or standard server environment (Railway, Heroku, Localhost)
+if (!process.env.VERCEL) {
   server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+} else {
+   console.log("🚀 Running in Vercel Serverless Mode");
 }
 
 export default app;

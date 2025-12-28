@@ -120,7 +120,7 @@ app.get("/api/status", (req, res) => res.send("✅ API is working fine"));
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 // Handle all other routes by serving index.html
-app.get("*", (req, res) => {
+app.get("/(.*)", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 

@@ -5,6 +5,6 @@ import optionalAuth from "../middlewares/optionalAuth.js";
 
 const router = express.Router();
 
-router.post("/chat", optionalAuth, rateLimiter, chatRespond);
+router.post("/", optionalAuth, rateLimiter, chatRespond);
 
 export default router;

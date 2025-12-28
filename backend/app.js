@@ -71,16 +71,30 @@ Cloudinary();
 
 app.get("/", (req, res) => res.send("✅ API is working fine on Vercel"));
 
-app.use("/user", userRoutes);
-app.use("/company", companyRoutes);
-app.use("/job", jobRoutes);
-app.use("/recommendation", recommendationRoutes);
-app.use("/notification", notificationRoutes);
-app.use("/lms", lmsRoutes);
-app.use("/events", eventRoutes);
-app.use("/ats", atsRoutes);
-app.use("/resume", resumeRoutes);
-app.use("/", chatRoutes);
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Mount routes with and without /api prefix for Vercel support
+const routes = [
+  { path: "/user", route: userRoutes },
+  { path: "/company", route: companyRoutes },
+  { path: "/job", route: jobRoutes },
+  { path: "/recommendation", route: recommendationRoutes },
+  { path: "/notification", route: notificationRoutes },
+  { path: "/lms", route: lmsRoutes },
+  { path: "/events", route: eventRoutes },
+  { path: "/ats", route: atsRoutes },
+  { path: "/resume", route: resumeRoutes },
+  { path: "/", route: chatRoutes },
+];
+
+routes.forEach((r) => {
+  app.use(r.path, r.route);
+  app.use("/api" + r.path, r.route);
+});
 
 // Socket.io Logic
 io.on("connection", (socket) => {
@@ -100,6 +114,22 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+// If we are in Heroku (or any environment where NODE_ENV=production),
+// we might want to ensure we aren't just relying on VERCEL env var for listening.
+// However, the existing logic:
+// if (process.env.VERCEL) { ... } else { server.listen(...) }
+// is actually fine for Heroku because Heroku doesn't set VERCEL=1.
+// So it will fall into the else block and listen on process.env.PORT.
+// No changes needed for this block specifically for Heroku compatibility.
+
+if (process.env.VERCEL) {
+  // Vercel serverless environment: export app, do not listen
+  console.log("🚀 Running in Vercel Serverless Mode");
+} else {
+  // Local or standard server environment
+  server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
 
 export default app;

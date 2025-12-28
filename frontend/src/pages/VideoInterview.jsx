@@ -29,7 +29,12 @@ const VideoInterview = () => {
     useEffect(() => {
         // Initialize socket
         try {
-            socketRef.current = io();
+            // If deployed on same origin (Render/Heroku monorepo), io() works automatically.
+            // If local development with proxy, it also works.
+            socketRef.current = io("/", {
+                path: "/socket.io", // Ensure default path is used
+                transports: ["websocket", "polling"]
+            });
         } catch (err) {
             toast.error("Connection failed");
             return;

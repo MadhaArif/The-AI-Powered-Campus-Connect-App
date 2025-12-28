@@ -1,0 +1,14 @@
+{
+  "name": "campus-connect-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "postinstall": "npm run install-backend && npm run install-frontend && npm run build-frontend",
+    "build-frontend": "cd frontend && npm run build",
+    "start": "cd backend && node app.js"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}
